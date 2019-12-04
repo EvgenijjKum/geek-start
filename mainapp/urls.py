@@ -10,6 +10,6 @@ urlpatterns = [
     path('product_list/', product_list, name = 'product_list'),
     path('product_list/product_detail/', product_detail, name ='product_detail'),
  
-
+#------------------------------
 
 ]
