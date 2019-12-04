@@ -137,5 +137,5 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-GOOGLE_RECAPTCHA_SECRET_KEY = ['6Le57cMUAAAAAOko8KTNiUfePe-R7YYZEnJtcFd7']
+GOOGLE_RECAPTCHA_SECRET_KEY = ['']
 
