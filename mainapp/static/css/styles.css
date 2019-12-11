@@ -88,3 +88,16 @@ body {
 .card{
   float: left;
 }
+.card-text-prod{
+    height: 80px;
+}
+.btn-prod-detail{
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+}
+
+
+

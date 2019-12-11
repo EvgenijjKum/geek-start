@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import ProductCategory, Product, ProductManufacturer
+
 
 def index(request):
     title_name = 'Личный сайт для тестов'
@@ -10,11 +12,13 @@ def index(request):
 def product_list(request):
     title_name = 'Каталог товаров'
     description = "Личный сайт для тестов: новости и примеры работ. Каталог товаров."
+
+    product_list = Product.objects.all()
     
-    context = {'set_title':title_name,'description':description}
+    context = {'set_title':title_name,'description':description,'product_list':product_list}
     return render(request, 'product_list.html',context)
 
-def product_detail(request):
+def product_detail(request,pk):
     title_name = 'Товар детально'
     
 

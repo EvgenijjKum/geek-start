@@ -30,64 +30,29 @@
 	<div class="col-xl-8">
 		<div class="row no-gutters">
 			<div class="col-xl-12 content">
+				<div class="row no-gutters">
 <!--******************************************************-->
+{% if product_list %}
+	{% for product in product_list %}
+		
+				  <div class="col-xl-3 col-sm-4">
+				  	<div class="card">
+						<!--img src="{% static "images/devushka-1.jpg" %}" class="card-img-top" alt="..."-->
+						<img class="img-fluid" src="{{ product.image.url }}" alt="Responsive image">
+						  <div class="card-body">
+						    <h5 class="card-title">{{ product.name }}</h5>
+						    <p class="card-text card-text-prod">{{ product.short_desc }}</p>
+						    <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary btn-prod-detail">Подробнее</a>
+					  	</div>
+					  </div>
+				  </div>
+		 
+	{% endfor %}
+{% endif %}
+		 
 
-<div class="row no-gutters justify-content-center">
-  <div class="col-xl-3 col-sm-4">
-  	<div class="card">
-		<img src="{% static "images/devushka-1.jpg" %}" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Shop jewerly</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="{% url 'product_detail' %}" class="btn btn-primary">Подробнее</a>
-	  	</div>
-	  </div>
-  </div>
-  <div class="col-xl-3 col-sm-4">
-  	<div class="card">
-		<img src="{% static "images/devushka-2.jpg" %}" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Shop jewerly</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="{% url 'product_detail' %}" class="btn btn-primary">Подробнее</a>
-	  	</div>
-	  </div>
-  </div>
-  <div class="col-xl-3 col-sm-4">
-  	<div class="card">
-		<img src="{% static "images/devushka-3.jpg" %}" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Shop jewerly</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="{% url 'product_detail' %}" class="btn btn-primary">Подробнее</a>
-	  	</div>
-	  </div>
-  </div>
-  <div class="col-xl-3 col-sm-4">
-  	<div class="card">
-		<img src="{% static "images/devushka-4.jpg" %}" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Shop jewerly</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="{% url 'product_detail' %}" class="btn btn-primary">Подробнее</a>
-	  	</div>
-	  </div>
-  </div>
-
-  <div class="col-xl-3 col-sm-4">
-  	<div class="card">
-		<img src="{% static "images/devushka-5.jpg" %}" class="card-img-top" alt="...">
-		  <div class="card-body">
-		    <h5 class="card-title">Shop jewerly</h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		    <a href="{% url 'product_detail' %}" class="btn btn-primary">Подробнее</a>
-	  	</div>
-	  </div>
-  </div>
- 
-</div>
 <!--******************************************************-->
-
+				</div>
 			</div>
 		</div>
 	</div>
