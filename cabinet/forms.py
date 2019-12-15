@@ -16,7 +16,7 @@ class ChangeUserInfoForm(forms.ModelForm):
 
     class Meta:
         model = AdvUser
-        fields = ('username', 'email', 'first_name', 'last_name','sex','birstday','address','phone', 'send_messages')
+        fields = ('avatar','username','age', 'email', 'first_name', 'last_name','sex','birstday','address','phone', 'send_messages')
 
 class RegisterUserForm(forms.ModelForm):
     email = forms.EmailField(required=True, label='Адрес электронной почты')
