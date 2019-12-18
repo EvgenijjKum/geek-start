@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp.apps.MainappConfig',
     'cabinet.apps.CabinetConfig',
+    'basketapp.apps.BasketappConfig',
     'bootstrap4',
 ]
 

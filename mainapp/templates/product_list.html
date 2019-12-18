@@ -17,12 +17,23 @@
 			<div class="col-xl-2 col1">
 			</div>  
 			<div class="col-xl-10 navi">
+				{% if category_list %}
 				<div class="head-nav">
 					<p class="head-nav-title">Категории работ</p>
 				</div>
 				<div>
-					блок с выбором категории<br>
+						<ul style="list-style-type: none;  text-align: center; margin-top: 20px;">
+							{% for category in category_list%}
+							<li><a
+                                    href="{% url 'product_category' category.pk %}"
+                                    class="{% if request.resolver_mach.kwargs.pk == category.pk %}"
+                                        active
+                                    {% endif %}">{{ category.name }}
+                            </a></li>
+							{% endfor %}
+						</ul>
 				</div>
+				{% endif %}
 			</div>
 			
 		</div>

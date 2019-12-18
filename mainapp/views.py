@@ -13,16 +13,40 @@ def product_list(request):
     title_name = 'Каталог товаров'
     description = "Личный сайт для тестов: новости и примеры работ. Каталог товаров."
 
-    product_list = Product.objects.all()
     
-    context = {'set_title':title_name,'description':description,'product_list':product_list}
+    context = {
+        'set_title':title_name,
+        'description':description,
+        'product_list':Product.objects.all(),
+        'category_list':ProductCategory.objects.all(),
+    }
     return render(request, 'product_list.html',context)
+
+
+def product_category(request, pk):
+    title_name = 'Каталог товаров'
+    description = "Личный сайт для тестов: новости и примеры работ. Каталог товаров."
+
+    product_list = Product.objects.filter(category=pk)
+
+
+    context = {
+        'set_title': title_name,
+        'description': description,
+        'product_list': product_list,
+        'category_list': ProductCategory.objects.all(),
+    }
+    return render(request, 'product_list.html', context)
 
 def product_detail(request,pk):
     title_name = 'Товар детально'
-    
-
+    current_product = Product.objects.get(pk=pk)
 
     description = 'Личный сайт для тестов: новости и примеры работ. Детальный просмотр позиции каталога.'
-    context = {'set_title':title_name,'description':description}
+    context = {
+        'set_title':title_name,
+        'description':description,
+        'current_product':current_product,
+        'category_list': ProductCategory.objects.all(),
+    }
     return render(request, 'product_detail.html',context)
