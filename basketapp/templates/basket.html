@@ -40,24 +40,45 @@
 	</div>
 	<div class="col-xl-8">
 		<div class="row no-gutters">
-			<div class="col-xl-12 content">
-				<div class="row no-gutters">
+			<div class="col-xl-8 content  justify-content-center">
+
 <!--******************************************************-->
 {% if basket_slot_list %}
-                   <ul>
-	{% for product in basket_slot_list %}
-		
-                       <li>{{ product.product }}</li>
-		 
+<table class="basket_table" width="100%" cellpadding="10" style="text-align: center; ">
+   <tr>
+	<th>Наименование</th>
+	<th>Количество</th>
+	<th>Действие</th>
+   </tr>
+	{% for basket_slot in basket_slot_list %}
+	 <tr>
+				  	<td>{{ basket_slot.product }}</td>
+					<td>{{ basket_slot.quantity }}</td>
+					<td>
+						<div class="button-next" style="padding-left: 100px; padding-right: 100px;">
+							<a href={% url 'basketapp:remove_product' basket_slot.pk %}>Удалить из корзины</a>
+				   		</div>
+					</td>
+	 </tr>
 	{% endfor %}
-         </ul>
+
+	<tr>
+		 <td></td>
+		 <td></td>
+		 <td style="padding-top: 20px;">
+			 <div class="button-buy" style="padding-left: 100px; padding-right: 100px;">
+				<a href="">Купить</a>
+			 </div>
+		 </td>
+	 </tr>
+</table>
 {% else%}
          Корзина пуста
                     {% endif %}
 		 
 
 <!--******************************************************-->
-				</div>
+
 			</div>
 		</div>
 	</div>

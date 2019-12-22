@@ -50,6 +50,9 @@
   <div class="col-xl-4 col-sm-4">
 		    <h5 class="card-title">{{ current_product.name }}</h5>
 		    <p class="card-text">{{ current_product.description }}</p>
+	  		<div class="button-next">
+            	<a href={% url 'basketapp:add_product' current_product.pk %}>Добавить в корзину</a>
+          	</div>
   </div>
 </div>
 <!--******************************************************-->
