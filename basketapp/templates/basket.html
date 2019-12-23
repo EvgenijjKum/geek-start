@@ -50,14 +50,16 @@
    <tr>
 	<th>Фото</th>
 	<th>Наименование</th>
+	<th>Стоимость ед.</th>
 	<th>Количество</th>
-	   
+
 	<th colspan="2">Действие</th>
    </tr>
 	{% for basket_slot in basket_slot_list %}
 	 <tr>
 		<td><img class="img-fluid basket-img" src="{{ basket_slot.product.image.url }}" alt="Responsive image"></td>
 		<td><a href="{% url 'product_detail' basket_slot.product.pk %}">{{ basket_slot.product }}</a></td>
+		<td></td>
 		<td>{{ basket_slot.quantity }}</td>
 		<td>
 			<div class="button-next button-basket-action">
