@@ -40,11 +40,7 @@ class RcLogoutView(LoginRequiredMixin,LogoutView):
 
 @login_required
 def profile(request):
-    #--------обязательный блок-------------------------
-    
-    #--------------------------------------------------
-    #context = {'posts_co':posts_co,'modelsCadillac':modelsCadillac,'modelsChevrolet':modelsChevrolet,
-    #'modelsHummer':modelsHummer,'modelsGMC':modelsGMC,'super_posts_co':super_posts_co}
+
     return render(request, 'profile/profile.html',)
         
 class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):

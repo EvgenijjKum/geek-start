@@ -1,0 +1,119 @@
+{% extends "base_generic.html" %} 
+
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+	<div class="col-xl-12 text-center">
+		<h1>{{ set_title }}</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xl-2">
+		<div class="row no-gutters">
+			
+			<div class="col-xl-2 col1">
+			</div>  
+			<div class="col-xl-10 navi">
+				{% if category_list %}
+				<div class="head-nav">
+					<p class="head-nav-title">Категории работ</p>
+				</div>
+				<div>
+						<ul style="list-style-type: none;  text-align: center; margin-top: 20px;">
+							{% for category in category_list%}
+							<li><a
+                                    href="{% url 'product_category' category.pk %}"
+                                    class="{% if request.resolver_mach.kwargs.pk == category.pk %}"
+                                        active
+                                    {% endif %}">{{ category.name }}
+                            </a></li>
+							{% endfor %}
+						</ul>
+				</div>
+				{% endif %}
+			</div>
+			
+		</div>
+	</div>
+	<div class="col-xl-8">
+		<div class="row no-gutters">
+			<div class="col-xl-8 content  justify-content-center">
+
+<!--******************************************************-->
+{% if basket_slot_list %}
+<table class="basket_table" width="100%" cellpadding="10" style="text-align: center; ">
+   <tr>
+	<th>Наименование</th>
+	<th>Количество</th>
+	<th>Действие</th>
+   </tr>
+	{% for basket_slot in basket_slot_list %}
+	 <tr>
+				  	<td>{{ basket_slot.product }}</td>
+					<td>{{ basket_slot.quantity }}</td>
+					<td>
+						<div class="button-next" style="padding-left: 100px; padding-right: 100px;">
+							<a href={% url 'basketapp:remove_product' basket_slot.pk %}>Удалить из корзины</a>
+				   		</div>
+					</td>
+	 </tr>
+	{% endfor %}
+
+	<tr>
+		 <td></td>
+		 <td></td>
+		 <td style="padding-top: 20px;">
+			 <div class="button-buy" style="padding-left: 100px; padding-right: 100px;">
+				<a href="">Купить</a>
+			 </div>
+		 </td>
+	 </tr>
+</table>
+{% else%}
+         Корзина пуста
+                    {% endif %}
+		 
+
+<!--******************************************************-->
+
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-2">
+		<div class="row no-gutters">
+			<!--
+			<div class="col-xl-10 navi">
+				<div class="head-nav">
+					<p class="head-nav-title">Новости</p>
+				</div>
+				<div>
+					{% if current_news %}
+					<div class="row no-gutters justify-content-center">
+						<div class="col-xl-12 col-sm-12">
+							<div class="card">
+								<img class="img-fluid card-img-top" src="{{ current_news.img.url }}" alt="Responsive image">
+
+								<div class="card-body">
+									<h5 class="card-title">{{ current_news.title  }}</h5>
+									<p style="font-size: 10px;">Новость от {{ current_news.create }}</p>
+									<a href="{% url 'post_detail' current_news.pk %}" class="btn btn-primary">Подробнее</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		-->
+			<div class="col-xl-2 col1">
+
+			</div> 
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

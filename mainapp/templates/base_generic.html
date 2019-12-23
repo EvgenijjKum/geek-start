@@ -44,40 +44,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle header-nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item ">
+              <a class="nav-link" href="{% url 'product_list' %}">
                 Магазин
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'product_list' %}">Перейти в магазин</a>
-              </div>
+
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle header-nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Блог
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="">Раздел в разработке</a>
-                {% if user.is_staff %}
-                <a class="dropdown-item" href="">Добавить новость</a>
-                {% endif %}
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle header-nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">
                 О сайте
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="">Раздел в разработке</a>
-              </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle header-nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
                 Контакты
               </a>
-              <div class="dropdown-menu btn-slide" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="">Раздел в разработке</a>
-              </div>
             </li>
 
             <li class="nav-item dropdown">
@@ -93,7 +75,7 @@
                 <a class="dropdown-item" href="{% url 'password_change' %}">Изменить пароль</a>
                 <a class="dropdown-item" href="{% url 'profile_delete' %}">Удалить профиль</a> 
                 <a class="dropdown-item" href="{% url 'logout' %}?next={{request.path}}">Выйти</a>
-
+                <a class="dropdown-item" href="{% url 'basketapp:basket_view' %}">Корзина</a>
                 <div class="dropdown-divider"></div>
                 {% if user.is_staff %}
                 {#<a class="dropdown-item" href="#">Супер-.</a>#}
@@ -132,7 +114,7 @@
     
   <!-- Footer -->
   <footer class="footer">
-    <div class="container-footer" style="background-color: #cda557;">
+    <div class="container-footer" style="background-color: #dae5f7;">
       <div class="row no-gutters justify-content-between">
         <div class="col-xl-3 col-sm-12">
           <span class="text-muted">© 2019 Copyright: master 

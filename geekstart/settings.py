@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp.apps.MainappConfig',
     'cabinet.apps.CabinetConfig',
+    'basketapp.apps.BasketappConfig',
     'bootstrap4',
 ]
 
@@ -137,5 +138,5 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-GOOGLE_RECAPTCHA_SECRET_KEY = ['6Le57cMUAAAAAOko8KTNiUfePe-R7YYZEnJtcFd7']
+GOOGLE_RECAPTCHA_SECRET_KEY = ['']
 
