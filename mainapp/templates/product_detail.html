@@ -53,6 +53,9 @@
 	  		<div class="button-next">
             	<a href={% url 'basketapp:add_product' current_product.pk %}>Добавить в корзину</a>
           	</div>
+	  		<div class="button-next" style="margin-top: 20px">
+				<a class="dropdown-item" href="{% url 'basketapp:basket_view' %}">Перейти в корзину</a>
+			</div>
   </div>
 </div>
 <!--******************************************************-->

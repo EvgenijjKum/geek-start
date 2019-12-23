@@ -40,41 +40,71 @@
 	</div>
 	<div class="col-xl-8">
 		<div class="row no-gutters">
-			<div class="col-xl-8 content  justify-content-center">
+			<div class="col-xl-1 content">
+			</div>
+			<div class="col-xl-12 content">
 
 <!--******************************************************-->
 {% if basket_slot_list %}
-<table class="basket_table" width="100%" cellpadding="10" style="text-align: center; ">
+<table class="basket_table" width="100%"  style="text-align: center;">
    <tr>
+	<th>Фото</th>
 	<th>Наименование</th>
 	<th>Количество</th>
-	<th>Действие</th>
+	   
+	<th colspan="2">Действие</th>
    </tr>
 	{% for basket_slot in basket_slot_list %}
 	 <tr>
-				  	<td>{{ basket_slot.product }}</td>
-					<td>{{ basket_slot.quantity }}</td>
-					<td>
-						<div class="button-next" style="padding-left: 100px; padding-right: 100px;">
-							<a href={% url 'basketapp:remove_product' basket_slot.pk %}>Удалить из корзины</a>
-				   		</div>
-					</td>
+		<td><img class="img-fluid basket-img" src="{{ basket_slot.product.image.url }}" alt="Responsive image"></td>
+		<td><a href="{% url 'product_detail' basket_slot.product.pk %}">{{ basket_slot.product }}</a></td>
+		<td>{{ basket_slot.quantity }}</td>
+		<td>
+			<div class="button-next button-basket-action">
+				<a href={% url 'basketapp:remove_product' basket_slot.product.pk %}>-</a>
+			</div>
+		</td>
+		<td>
+			<div class="button-next button-basket-action">
+				<a href={% url 'basketapp:add_product' basket_slot.product.pk %}>+</a>
+			</div>
+		</td>
 	 </tr>
 	{% endfor %}
 
+</table>
+<br>
+<h4>Итого:</h4>
+<table class="basket_table" width="100%"  style="text-align: center;">
+	<tr>
+		<td>Всеего товаров</td>
+		<td>Общая стоимость</td>
+		<td>Итого</td>
+	</tr>
+	<tr>
+		<td>Итого</td>
+		<td>Итого</td>
+		<td>Итого</td>
+		<td>Итого</td>
+		<td>Итого</td>
+	</tr>
 	<tr>
 		 <td></td>
 		 <td></td>
-		 <td style="padding-top: 20px;">
-			 <div class="button-buy" style="padding-left: 100px; padding-right: 100px;">
+		 <td></td>
+		 <td></td>
+		 <td class="basket_table_td_buy">
+			 <div class="button-buy">
 				<a href="">Купить</a>
 			 </div>
 		 </td>
 	 </tr>
+
+
 </table>
 {% else%}
          Корзина пуста
-                    {% endif %}
+{% endif %}
 		 
 
 <!--******************************************************-->
