@@ -15,6 +15,9 @@
 .logo img{
   width: 50px;
 }
+.basket img{
+    width: 50px;
+}
 .contact{
   float: right;
   margin-right:  17%;
@@ -172,4 +175,8 @@ body {
 .button-basket-action{
     width: 80px;
     margin: 0 auto;
+}
+.quantity-basket{
+    color: red;
+    font-size: 20px;
 }

@@ -52,14 +52,15 @@
 	<th>Наименование</th>
 	<th>Стоимость ед.</th>
 	<th>Количество</th>
-
 	<th colspan="2">Действие</th>
+	<th>Сумма</th>
+
    </tr>
 	{% for basket_slot in basket_slot_list %}
 	 <tr>
 		<td><img class="img-fluid basket-img" src="{{ basket_slot.product.image.url }}" alt="Responsive image"></td>
 		<td><a href="{% url 'product_detail' basket_slot.product.pk %}">{{ basket_slot.product }}</a></td>
-		<td></td>
+		<td>{{ basket_slot.product.price }}</td>
 		<td>{{ basket_slot.quantity }}</td>
 		<td>
 			<div class="button-next button-basket-action">
@@ -68,42 +69,48 @@
 		</td>
 		<td>
 			<div class="button-next button-basket-action">
-				<a href={% url 'basketapp:add_product' basket_slot.product.pk %}>+</a>
+				<a href={% url 'basketapp:add' basket_slot.product.pk %}>+</a>
 			</div>
 		</td>
+		<td>{{ basket_slot.product_cost }} руб </td>
 	 </tr>
 	{% endfor %}
-
 </table>
 <br>
-<h4>Итого:</h4>
-<table class="basket_table" width="100%"  style="text-align: center;">
-	<tr>
-		<td>Всеего товаров</td>
-		<td>Общая стоимость</td>
-		<td>Итого</td>
-	</tr>
-	<tr>
-		<td>Итого</td>
-		<td>Итого</td>
-		<td>Итого</td>
-		<td>Итого</td>
-		<td>Итого</td>
-	</tr>
-	<tr>
-		 <td></td>
-		 <td></td>
-		 <td></td>
-		 <td></td>
-		 <td class="basket_table_td_buy">
-			 <div class="button-buy">
-				<a href="">Купить</a>
-			 </div>
-		 </td>
-	 </tr>
+<br>
 
-
-</table>
+<div class="row no-gutters">
+	<div class="col-xl-8 col-md-8 content">
+	</div>
+	<div class="col-xl-4 col-md-8 content">
+		<table  width="100%"  style="text-align: center;">
+			<tr style="border-bottom: 3px solid #ccc;">
+				<th><h4>Ваш заказ:</h4></th>
+				<th></th>
+			</tr>
+			<tr style="border-bottom: 1px solid #ccc;">
+				<td>Всего товаров</td>
+				<td>Общая стоимость</td>
+			</tr>
+			<tr style="border-bottom: 1px solid #ccc;">
+				{# for basket_slot in basket_slot_list #}
+					{# if forloop.first #}
+						<td>{{ basket_slot_list.0.total_quantity }} ед.</td>
+						<td>{{ basket_slot_list.0.total_cost }} руб.</td>
+					{# endif #}
+				{# endfor #}
+			</tr>
+			<tr>
+				 <td></td>
+				 <td class="basket_table_td_buy">
+					 <div class="button-buy">
+						<a href="">Купить</a>
+					 </div>
+				 </td>
+			 </tr>
+		</table>
+	</div>
+</div>
 {% else%}
          Корзина пуста
 {% endif %}

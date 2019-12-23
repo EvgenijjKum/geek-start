@@ -5,10 +5,8 @@ from cabinet.models import AdvUser
 
 
 def basket(request):
-    basket_slot_list = BasketSlot.objects.filter(user=request.user)
-
     content = {
-        'basket_slot_list':basket_slot_list,
+        'basket_slot_list':BasketSlot.objects.filter(user=request.user)
     }
     return render(request, 'basket.html', content)
 
@@ -24,6 +22,22 @@ def basket_add(request, pk):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def add(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    basket_slot = BasketSlot.objects.filter(user=request.user, product=product).first()
+    if basket_slot:
+        basket_slot.quantity += 1
+        basket_slot.save()
+    else:
+        BasketSlot(user=request.user, product=product).save()
+
+
+
+    content = {
+        'basket_slot_list': BasketSlot.objects.filter(user=request.user),
+        'sum': basket_slot.quantity * basket_slot.product.price
+    }
+    return render(request, 'basket.html', content)
 
 def basket_remove(request, pk):
     product = get_object_or_404(Product, pk=pk)
