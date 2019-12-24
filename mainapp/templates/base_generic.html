@@ -103,14 +103,16 @@
     </div>
     <div class="basket">
       {% if user.is_authenticated %}
+
+        <div class="quantity-basket">
+          {{ basket_slot_list.0.total_quantity }}
+        </div>
         <a href="{% url 'basketapp:basket_view' %}"> <img src="{% static "images/shopping-cart.png" %}" ></a>
       {% else%}
         <img src="{% static "images/shopping-cart.png" %}" >
       {% endif %}
     </div>
-    <div class="quantity-basket">
-      {{ basket_slot_list.0.total_quantity }}
-    </div>
+
   </nav>
   <div class="container-fluid" style="padding-bottom: 20px;">
     <section>
@@ -136,6 +138,10 @@
   </footer>
 
 
+{% block js %}
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/basket_scripts.js' %}"></script>
+{% endblock %}
 
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
