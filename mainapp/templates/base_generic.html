@@ -45,7 +45,7 @@
           <ul class="navbar-nav mr-auto">
 
             <li class="nav-item ">
-              <a class="nav-link" href="{% url 'product_list' %}">
+              <a class="nav-link" href="{% url 'mainapp:product_list' %}">
                 Магазин
               </a>
 
@@ -101,16 +101,8 @@
         </div>
       </div>
     </div>
-    <div class="basket">
-      {% if user.is_authenticated %}
-
-        <div class="quantity-basket">
-          {{ basket_slot_list.0.total_quantity }}
-        </div>
-        <a href="{% url 'basketapp:basket_view' %}"> <img src="{% static "images/shopping-cart.png" %}" ></a>
-      {% else%}
-        <img src="{% static "images/shopping-cart.png" %}" >
-      {% endif %}
+    <div class="cart">
+        Your cart is empty.
     </div>
 
   </nav>
@@ -139,7 +131,7 @@
 
 
 {% block js %}
-    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/basket_scripts.js' %}"></script>
 {% endblock %}
 
