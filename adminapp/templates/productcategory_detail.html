@@ -1,9 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base_generic.html" %} 
 
-</body>
-</html>
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+      <div class="col-xl-12 text-center">
+        <h1>{{ set_title }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-2">
+        <div class="row no-gutters">
+          <div class="col-xl-2 col1">
+           
+          </div>  
+          <div class="col-xl-10 navi">
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xl-8">
+        <div class="row no-gutters">
+			<div class="col-2 content">
+			</div>
+          <div class="col-8 content">
+            {% if productcategory %}
+              <h2>Категория детально: {{ productcategory.name }}</h2>
+			    <table style="width: 100%;">
+					<tr style="border-bottom: 2px solid #d4d4d4;">
+						<th>Наименование</th>
+						<th>Значение</th>
+					</tr>
+					<tr>
+						<td><strong>Название категории:</strong></td>
+						<td>{{ productcategory.name }}</td>
+					</tr>
+					<tr>
+						<td><strong>Slug:</strong></td>
+						<td>{{ productcategory.slug }}</td>
+					</tr>
+					<tr>
+						<td><strong>Описание категории (если есть):</strong></td>
+						<td>{{ productcategory.description }}</td>
+					</tr>
+				</table>
+			  	<br>
+			  	<a href="{% url 'adminapp:update-category' productcategory.pk %}">Изменить категорию</a>
+			  	<br>
+			  	<a href="{% url 'adminapp:delete-category' productcategory.pk %}">Удалить категорию</a>
+                <br>
+                <br>
+                <a href="{% url 'adminapp:list-category' %}"><< Вернуться ко всем Категориям товаров</a>
+
+            {% else %}
+              Нет данных для отображения
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2">
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

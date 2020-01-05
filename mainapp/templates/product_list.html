@@ -19,17 +19,19 @@
 			<div class="col-xl-10 navi">
 				{% if category_list %}
 				<div class="head-nav">
-					<p class="head-nav-title">Категории работ</p>
+					<p class="head-nav-title">Категории</p>
 				</div>
 				<div>
 						<!--ul style="list-style-type: none;  text-align: center; margin-top: 20px;"-->
 						<ul style="list-style-type: none;  text-align: center; margin-top: 20px;">
-							<li {% if not category_list %}
-									class="list-group-item list-group-item-action list-group-item-primary active"
-								{% else %}
+							<li> <a href="{% url 'mainapp:product_list' %}"
+								{% if active_category %}
 									class="list-group-item list-group-item-action list-group-item-primary">
+								{% else %}
+									class="list-group-item list-group-item-action list-group-item-primary active">
+
 								{% endif %}
-								<a href="{% url 'mainapp:product_list' %}">Любая</a>
+								Любая</a>
 							</li>
 							{% for category in category_list %}
 							<li><a
@@ -40,13 +42,7 @@
 										class="list-group-item list-group-item-action list-group-item-primary">
 									{% endif %}
 
-								{{ category.name }}-{{ active_category }}-{{ category.pk }}
-								{% if active_category == category.pk %}
-									T
-								{% else %}
-									F
-								{% endif %}
-
+								{{ category.name }}
                             </a></li>
 							{% endfor %}
 						</ul>
@@ -66,15 +62,16 @@
 	{% for product in product_list %}
 		
 				  <div class="col-xl-3 col-sm-4">
-				  	<div class="card">
-						<!--img src="{% static "images/devushka-1.jpg" %}" class="card-img-top" alt="..."-->
-						{% if product.image %}
-						<img class="img-fluid" src="{{ product.image.url }}" alt="Responsive image">
-						{% endif %}
+				  	<div class="card-product">
+						<div class="block-card-product_img">
+							{% if product.image %}
+							<img class="ard_image" src="{{ product.image.url }}" alt="Responsive image">
+							{% endif %}
+						</div>
 						  <div class="card-body">
 						    <h5 class="card-title">{{ product.name }}</h5>
 						    <p class="card-text card-text-prod">{{ product.short_desc }}</p>
-						    <a href="{% url 'mainapp:product_detail' product.pk %}" class="btn btn-primary btn-prod-detail">Подробнее</a>
+						    <a href="{% url 'mainapp:product_detail' product.pk %}" class="btn btn-primary btn-prod-detail">Больше</a>
 					  	</div>
 					  </div>
 				  </div>

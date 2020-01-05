@@ -19,19 +19,33 @@
 			<div class="col-xl-10 navi">
 				{% if category_list %}
 				<div class="head-nav">
-					<p class="head-nav-title">Категории работ</p>
+					<p class="head-nav-title">Категории</p>
 				</div>
 				<div>
-						<ul style="list-style-type: none; text-decoration: none; text-align: center; margin-top: 20px;">
-							{% for category in category_list%}
+						<!--ul style="list-style-type: none;  text-align: center; margin-top: 20px;"-->
+						<ul style="list-style-type: none;  text-align: center; margin-top: 20px;">
+							<li> <a href="{% url 'mainapp:product_list' %}"
+									{% if not category_list %}
+									class="list-group-item list-group-item-action list-group-item-primary active">
+								{% else %}
+									class="list-group-item list-group-item-action list-group-item-primary">
+								{% endif %}
+								Любая</a>
+							</li>
+							{% for category in category_list %}
 							<li><a
-                                    href="{% url 'product_category' category.pk %}"
-                                    class="{% if request.resolver_mach.kwargs.pk == category.pk %}"
-                                        active
-                                    {% endif %}">{{ category.name }}
+                                    href="{% url 'mainapp:product_category' category.pk %}"
+                                    {% if active_category == category.pk %}
+										class="list-group-item list-group-item-action list-group-item-primary active">
+									{% else %}
+										class="list-group-item list-group-item-action list-group-item-primary">
+									{% endif %}
+
+								{{ category.name }}
                             </a></li>
 							{% endfor %}
 						</ul>
+
 				</div>
 				{% endif %}
 			</div>
@@ -45,20 +59,45 @@
 
 <div class="row justify-content-center">
   <div class="col-xl-8 col-sm-4">
+	  {% if current_product.image %}
 		<img class="img-fluid" src="{{ current_product.image.url }}" alt="Responsive image">
+	  {% else %}
+	  	Нет изображения
+	  {% endif %}
   </div>
   <div class="col-xl-4 col-sm-4">
-		    <h5 class="card-title">{{ current_product.name }}</h5>
-		    <p class="card-text">{{ current_product.description }}</p>
+		    <h3 class="card-title">{{ current_product.name }}</h3>
+	  		<p><strong>Категория:</strong> {{ current_product.category.name }}</p>
+	  		<p class="product_price"><strong>Цена:</strong> {{ current_product.price }} руб</p>
+
+		    <p class="card-text"><strong>Описание:</strong> {{ current_product.description }}</p>
 	  		<div class="button-next">
             	<a href={% url 'basketapp:add_product' current_product.pk %}>Добавить в корзину</a>
           	</div>
 	  		<div class="button-next" style="margin-top: 20px">
 				<a class="dropdown-item" href="{% url 'basketapp:basket_view' %}">Перейти в корзину</a>
 			</div>
+	  {# ************************************************** #}
+
+		<div class="basket_record">
+			<br>
+			<p>В наличии: {{ current_product.quantity }}</p>
+
+			<input type="number" name="{{ current_product.pk }}" min="1" value="1">
+
+			<button class="btn btn-round">
+				<a href="{# url 'basketapp:edit' item.product.pk item.pk #}" class="">
+					Добавить в корзину
+				</a>
+			</button>
+		</div>
+	  {# ************************************************** #}
+
+
+
   </div>
 </div>
-<!--******************************************************-->
+	<!-- ****************************************************** -->
 
 			</div>
 		</div>

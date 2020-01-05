@@ -1,9 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base_generic.html" %} 
 
-</body>
-</html>
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+      <div class="col-xl-12 text-center">
+        <h1>{{ set_title }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-2">
+        <div class="row no-gutters">
+          <div class="col-xl-2 col1">
+           
+          </div>  
+          <div class="col-xl-10 navi">
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xl-8">
+        <div class="row no-gutters">
+          <div class="col-2 content">
+          </div>
+          <div class="col-8 content">
+
+            {% if productcategory_list %}
+              <h2>Все категории</h2>
+              <div style="height: 150px;">
+                  <ol>
+                 {% for category in productcategory_list %}
+                    <li><a href="{% url 'adminapp:view-category-detail' category.pk %}">{{ category.name }}</a></li>
+                 {% endfor %}
+                  </ol>
+              </div>
+              {% block pagination %}
+                {% if is_paginated %}
+                    <div class="pagination">
+                        <span class="page-links">
+                            {% if page_obj.has_previous %}
+                                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                            {% endif %}
+                            <span class="page-current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+              {% endblock %}
+
+            {% else %}
+              Нет категорий
+            {% endif %}
+
+              <br>
+              <a href="{% url 'adminapp:create-category' %}">Добавить категорию</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2">
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

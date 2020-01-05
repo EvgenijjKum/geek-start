@@ -2,7 +2,7 @@
 *~
 __pycache__/
 env/
-migrations/
+*/migrations/
 .idea/
 *.sqlite3
 .DS_Store

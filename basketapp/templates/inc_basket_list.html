@@ -12,7 +12,7 @@
 	{% for basket_slot in basket_slot_list %}
 	 <tr>
 		<td><img class="img-fluid basket-img" src="{{ basket_slot.product.image.url }}" alt="Responsive image"></td>
-		<td><a href="{% url 'product_detail' basket_slot.product.pk %}">{{ basket_slot.product }}</a></td>
+		<td><a href="{% url 'mainapp:product_detail' basket_slot.product.pk %}">{{ basket_slot.product }}</a></td>
 		<td>{{ basket_slot.product.price }}</td>
 		<td>{{ basket_slot.quantity }}</td>
 		<td>
@@ -65,21 +65,5 @@
 	</div>
 </div>
 
-{% for item in basket_slot_list %}
-    <div class="basket_record">
-        <!--img src="/media/{{ item.product.image }}"
-             alt="{{ item.product.short_desc }}"-->
-        <span class="category_name">{{ item.product.category.name }}</span>
-        <span class="product_name">{{ item.product.name }}</span>
-        <span class="product_price">{{ item.product.price }}</span>
 
-        <input type="number" name="{{ item.pk }}" min="0" value="{{ item.quantity }}">
-        <span class="product_cost">{{ item.cost }}&nbspруб</span>
-        <button class="btn btn-round">
-            <a href="{% url 'basketapp:edit' item.product.pk item.pk %}" class="">
-                сохранить изменения
-            </a>
-        </button>
-    </div>
-{% endfor %}
 

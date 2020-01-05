@@ -1,11 +1,11 @@
 from django.db import models
 from django.urls import reverse
 
+
 class ProductCategory(models.Model):
     name = models.CharField(verbose_name='Категория', max_length=64, unique=True)
-    slug = models.SlugField(max_length=200,db_index=True, unique=True)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True)
     description = models.TextField(verbose_name='Описание', blank=True)
-    
 
     class Meta:
         verbose_name_plural = "Категории"
@@ -18,6 +18,7 @@ class ProductCategory(models.Model):
     def get_absolute_url(self):
         return reverse('mainapp:product_list_by_category',
                        args=[self.slug])
+
 
 class ProductManufacturer(models.Model):
     name = models.CharField(verbose_name='Производитель', max_length=64, unique=True)

@@ -1,9 +1,121 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base_generic.html" %} 
 
-</body>
-</html>
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+      <div class="col-xl-12 text-center">
+        <h1>{{ set_title }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-2">
+        <div class="row no-gutters">
+          <div class="col-xl-2 col1">
+           
+          </div>  
+          <div class="col-xl-10 navi">
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xl-8">
+        <div class="row no-gutters">
+			<div class="col-2 content">
+			</div>
+          <div class="col-8 content">
+            {% if advuser %}
+              <h2>Пользователь детально: {{ advuser.username }}</h2>
+			    <table style="width: 100%;">
+					<tr style="border-bottom: 2px solid #d4d4d4;">
+						<th>Наименование</th>
+						<th>Значение</th>
+					</tr>
+					<tr>
+						<td><strong>Аватар:</strong></td>
+						{% if advuser.avatar %}
+							<td><img class="img-fluid" style="width: 150px;" src="{{ advuser.avatar.url }}" alt="avatar"></td>
+						{% else %}
+							<td>Нет аватара</td>
+						{% endif %}
+					</tr>
+					<tr>
+						<td><strong>Никнейм:</strong></td>
+						<td>{{ advuser.username }}</td>
+					</tr>
+					<tr>
+						<td><strong>Настоящее имя:</strong></td>
+						<td>{{ advuser.first_name }}</td>
+					</tr>
+					<tr>
+						<td><strong>Настоящяя фамилия:</strong></td>
+						<td>{{ advuser.last_name }}</td>
+					</tr>
+					<tr>
+						<td><strong>Статус персонала:</strong></td>
+						<td>{{ advuser.is_staff }}</td>
+					</tr>
+					<tr>
+						<td><strong>Возраст:</strong></td>
+						<td>{{ advuser.age }}</td>
+					</tr>
+					<tr>
+						<td><strong>Пол:</strong></td>
+						<td>{{ advuser.get_sex_display }}</td>
+					</tr>
+					<tr>
+						<td><strong>День рождения:</strong></td>
+						<td>{{ advuser.birstday }}</td>
+					</tr>
+					<tr>
+						<td><strong>Место жительства:</strong></td>
+						<td>{{ advuser.address }}</td>
+					</tr>
+					<tr>
+						<td><strong>Телефон:</strong></td>
+						<td>{{ advuser.phone }}</td>
+					</tr>
+					<tr>
+						<td><strong>E-mail:</strong></td>
+						<td>{{ advuser.email }}</td>
+					</tr>
+					<tr>
+						<td><strong>Активирован?</strong></td>
+						<td>{{ advuser.is_activated }}</td>
+					</tr>
+					<tr>
+						<td><strong>Слать оповещения по электронной почте?</strong></td>
+						<td>{{ advuser.send_messages }}</td>
+					</tr>
+				</table>
+			  	<br>
+			  	<a href="{% url 'adminapp:update-user' advuser.pk %}">Изменить пользователя</a>
+			  	<br>
+			  	<a href="{% url 'adminapp:delete-user' advuser.pk %}">Удалить пользователя</a>
+                <br>
+                <br>
+                <a href="{% url 'adminapp:list-user' %}"><< Вернуться к списку пользователей</a>
+
+            {% else %}
+              Нет данных для отображения
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2">
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

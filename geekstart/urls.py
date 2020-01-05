@@ -26,6 +26,7 @@ urlpatterns = [
     path('cabinet/', include('cabinet.urls')),
     path('shop/', include('mainapp.urls')),
     path('basket/', include('basketapp.urls')),
+    path('adminapp/', include('adminapp.urls')),
     url(r'^$', index, name='index'),
 ]
 

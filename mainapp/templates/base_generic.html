@@ -78,14 +78,14 @@
                 <a class="dropdown-item" href="{% url 'basketapp:basket_view' %}">Корзина</a>
                 <div class="dropdown-divider"></div>
                 {% if user.is_staff %}
-                {#<a class="dropdown-item" href="#">Супер-.</a>#}
+                <a class="dropdown-item" href="{% url 'adminapp:list-all-product' %}">Товары</a>
+                <a class="dropdown-item" href="{% url 'adminapp:list-category' %}">Категории товаров</a>
+                <a class="dropdown-item" href="{% url 'adminapp:list-user' %}">Пользователи</a>
 
                 <hr>
                 {% endif %}
                 <a class="dropdown-item" href="{# url 'help_me' #}">Помощь</a>
                 <a class="dropdown-item" href="{# url 'about' #}">О сайте</a>
-
-
 
                 {% else %}
                 <a class="dropdown-item" href="{% url 'login' %}?next={{request.path}}">Войти</a>

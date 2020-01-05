@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView,PasswordChangeView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -8,41 +5,28 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView,UpdateView, DeleteView
 
 from .models import AdvUser
-from .forms import  ChangeUserInfoForm, RegisterUserForm
+from .forms import ChangeUserInfoForm, RegisterUserForm
 from django.urls import reverse_lazy,reverse
 from django.views.generic.base import TemplateView
-from django.views import generic
 from django.shortcuts import render, get_object_or_404
 from django.core.signing import BadSignature
 from .utilities import signer
 
-from cabinet.captcha_decorators import check_recaptcha
 
-
-#-----------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------------------
 class RcLoginView(LoginView):
     template_name = 'profile/login.html'
 
-    """
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        context['modelsCadillac'] = SuperModelAuto.objects.filter(markAuto__title='Cadillac')
-        context['modelsChevrolet'] = SuperModelAuto.objects.filter(markAuto__title='Chevrolet')
-        context['modelsHummer'] = SuperModelAuto.objects.filter(markAuto__title='Hummer')
-        context['modelsGMC'] = SuperModelAuto.objects.filter(markAuto__title='GMC')
-        context['posts_co'] = Post.objects.all().count()
-        context['super_posts_co'] = SuperPost.objects.all().count()
-        return context 
-    """
+
 class RcLogoutView(LoginRequiredMixin,LogoutView):
     template_name = 'profile/logout.html'
         
 
 @login_required
 def profile(request):
-
     return render(request, 'profile/profile.html',)
-        
+
+
 class ChangeUserInfoView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = AdvUser
     template_name = 'profile/change_user_info.html'

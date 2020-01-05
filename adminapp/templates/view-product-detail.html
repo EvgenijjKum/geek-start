@@ -1,9 +1,85 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base_generic.html" %} 
 
-</body>
-</html>
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+      <div class="col-xl-12 text-center">
+        <h1>{{ set_title }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-2">
+        <div class="row no-gutters">
+          <div class="col-xl-2 col1">
+           
+          </div>  
+          <div class="col-xl-10 navi">
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xl-8">
+        <div class="row no-gutters">
+			<div class="col-2 content">
+			</div>
+          <div class="col-8 content">
+            {% if product %}
+              <h2>Товар детально: {{ product.name }}</h2>
+			    <table style="width: 100%;">
+					<tr style="border-bottom: 4px solid #d4d4d4;">
+						<th style="width: 50%;">Наименование</th>
+						<th>Значение</th>
+					</tr>
+					<tr>
+						<td><strong>Изображение товара:</strong></td>
+						{% if product.image %}
+							<td><img class="img-fluid" style="width: 150px;" src="{{ product.image.url }}" alt="изображение"></td>
+						{% else %}
+							<td>Нет изображения</td>
+						{% endif %}
+					</tr>
+					<tr>
+						<td><strong>Название товара:</strong></td>
+						<td>{{ product.name }}</td>
+					</tr>
+					<tr>
+						<td><strong>Slug:</strong></td>
+						<td>{{ product.slug }}</td>
+					</tr>
+					<tr>
+						<td><strong>Описание товара (если есть):</strong></td>
+						<td>{{ product.description }}</td>
+					</tr>
+				</table>
+			  	<br>
+			  	<a href="{% url 'adminapp:update-product' product.pk %}">Изменить товар</a>
+			  	<br>
+			  	<a href="{% url 'adminapp:delete-product' product.pk %}">Удалить товар</a>
+                <br>
+                <br>
+                <a href="{% url 'adminapp:list-all-product' %}"><< Вернуться ко всем Товарам</a>
+
+            {% else %}
+              Нет данных для отображения
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2">
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

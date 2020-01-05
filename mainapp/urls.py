@@ -8,7 +8,7 @@ app_name = 'mainapp'
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^product_list/$', product_list, name='product_list'),
-    url(r'^product_category/(?P<pk>\d+)/$', product_category, name='product_category'),
+    path('product_category/<int:pk>', product_category, name='product_category'),
     url(r'^product_detail/(?P<pk>\d+)/$', product_detail, name='product_detail'),
 
     # ------------------------------

@@ -1,9 +1,94 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base_generic.html" %} 
 
-</body>
-</html>
+{% load bootstrap4 %} 
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+      <div class="col-xl-12 text-center">
+        <h1>{{ set_title }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-2">
+        <div class="row no-gutters">
+          <div class="col-xl-2 col1">
+           
+          </div>  
+          <div class="col-xl-10 navi">
+
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-xl-8">
+        <div class="row no-gutters">
+          <div class="col-2 content">
+          </div>
+          <div class="col-8 content">
+
+            {% if product_list %}
+              <h2>Все товары</h2>
+              <table style="width: 100%; text-align: center">
+                  <tr style="border-bottom: 4px solid #d4d4d4;">
+                      <th>Картинка</th>
+                      <th>Название</th>
+                      <th>Цена</th>
+                      <th>Кол-во на складе</th>
+                  </tr>
+                 {% for product in product_list %}
+                  <tr style="border-bottom: 1px solid #d4d4d4;">
+                        {% if product.image %}
+                        <td><img class="img-fluid" style="width: 100px;" src="{{ product.image.url }}" alt="картинка"></td>
+                        {% else %}
+                            <td>Нет картинки</td>
+                        {% endif %}
+                      <td><a href="{% url 'adminapp:view-product-detail' product.pk %}">{{ product.name }}</a></td>
+                      <td>{{ product.price }}</td>
+                      <td>{{ product.quantity }}</td>
+                  </tr>
+                 {% endfor %}
+
+              </table>
+              {% block pagination %}
+                {% if is_paginated %}
+                    <div class="pagination">
+                        <span class="page-links">
+                            {% if page_obj.has_previous %}
+                                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                            {% endif %}
+                            <span class="page-current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+              {% endblock %}
+
+            {% else %}
+              Нет категорий
+            {% endif %}
+
+              <br>
+              <a href="{% url 'adminapp:create-product' %}">Добавить товар</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2">
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

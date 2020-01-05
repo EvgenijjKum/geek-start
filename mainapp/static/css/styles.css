@@ -44,11 +44,11 @@
 .head-nav{
     /*outline: 1px solid #212121;*/
     min-height: 60px;
-    background-color: #dae5f7;
+    background-color: #b8daff;
     text-align: center;
     font-size: 18px;
     line-height: 24px;
-    color: #fff;
+    color: #004085;
     width: 100%;
     display: table;   
 }
@@ -184,4 +184,18 @@ body {
 }
 .basket{
     margin-right: 20px;
+}
+.card-product{
+    border-radius: 4px;
+    border: 1px solid #949494;
+}
+.block-card-product_img{
+    display: table;
+    height: 300px;
+}
+.block-card-product_img img{
+    width: 100%;
+}
+.card-product{
+    width: 100%;
 }

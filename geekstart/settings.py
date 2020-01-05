@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'cabinet.apps.CabinetConfig',
     'basketapp.apps.BasketappConfig',
+    'adminapp.apps.AdminappConfig',
     'bootstrap4',
 ]
 

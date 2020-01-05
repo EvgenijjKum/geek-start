@@ -29,11 +29,11 @@ def basket_edit(request, pk, quantity):
         result = render_to_string('basketapp/templates/inc_basket_list.html', content)
 
         return JsonResponse({'result': result})
-        #return render(request, 'basket.html', )
+
 
 def basket(request):
     content = {
-        'basket_slot_list':BasketSlot.objects.filter(user=request.user)
+        'basket_slot_list': BasketSlot.objects.filter(user=request.user)
     }
     return render(request, 'basket.html', content)
 
@@ -49,6 +49,7 @@ def basket_add(request, pk):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def add(request, pk):
     product = get_object_or_404(Product, pk=pk)
     basket_slot = BasketSlot.objects.filter(user=request.user, product=product).first()
@@ -58,13 +59,12 @@ def add(request, pk):
     else:
         BasketSlot(user=request.user, product=product).save()
 
-
-
     content = {
         'basket_slot_list': BasketSlot.objects.filter(user=request.user),
         'sum': basket_slot.quantity * basket_slot.product.price
     }
     return render(request, 'basket.html', content)
+
 
 def basket_remove(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -76,7 +76,7 @@ def basket_remove(request, pk):
             basket_slot.quantity -= 1
             basket_slot.save()
 
-    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     basket_slot_list = BasketSlot.objects.filter(user=request.user)
 
