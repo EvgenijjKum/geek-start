@@ -2,6 +2,9 @@
 *~
 __pycache__/
 env/
+migrations/
 .idea/
 *.sqlite3
 .DS_Store
+venv/
+
