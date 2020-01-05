@@ -17,37 +17,13 @@
 			<div class="col-xl-2 col1">
 			</div>  
 			<div class="col-xl-10 navi">
-				{% if category_list %}
+
 				<div class="head-nav">
-					<p class="head-nav-title">Категории</p>
+					<a href="{% url 'mainapp:product_list' %}"
+					   class="list-group-item list-group-item-action list-group-item-primary">
+					<<К списку товаров</a>
 				</div>
-				<div>
-						<!--ul style="list-style-type: none;  text-align: center; margin-top: 20px;"-->
-						<ul style="list-style-type: none;  text-align: center; margin-top: 20px;">
-							<li> <a href="{% url 'mainapp:product_list' %}"
-									{% if not category_list %}
-									class="list-group-item list-group-item-action list-group-item-primary active">
-								{% else %}
-									class="list-group-item list-group-item-action list-group-item-primary">
-								{% endif %}
-								Любая</a>
-							</li>
-							{% for category in category_list %}
-							<li><a
-                                    href="{% url 'mainapp:product_category' category.pk %}"
-                                    {% if active_category == category.pk %}
-										class="list-group-item list-group-item-action list-group-item-primary active">
-									{% else %}
-										class="list-group-item list-group-item-action list-group-item-primary">
-									{% endif %}
 
-								{{ category.name }}
-                            </a></li>
-							{% endfor %}
-						</ul>
-
-				</div>
-				{% endif %}
 			</div>
 			
 		</div>
@@ -83,13 +59,11 @@
 			<br>
 			<p>В наличии: {{ current_product.quantity }}</p>
 
-			<input type="number" name="{{ current_product.pk }}" min="1" value="1">
+			{#<input type="number" name="{{ current_product.pk }}" min="1" value="1">#}
 
-			<button class="btn btn-round">
-				<a href="{# url 'basketapp:edit' item.product.pk item.pk #}" class="">
-					Добавить в корзину
-				</a>
-			</button>
+			{#<button class="btn btn-round">#}
+			{#	<a href="" class="">Добавить в корзину</a>#}
+			{#</button>#}
 		</div>
 	  {# ************************************************** #}
 

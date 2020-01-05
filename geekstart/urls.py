@@ -19,7 +19,7 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
-from mainapp.views import index
+from mainapp.views import ProductListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,7 @@ urlpatterns = [
     path('shop/', include('mainapp.urls')),
     path('basket/', include('basketapp.urls')),
     path('adminapp/', include('adminapp.urls')),
-    url(r'^$', index, name='index'),
+    url(r'^$', ProductListView.as_view(), name='index'),
 ]
 
 if settings.DEBUG:

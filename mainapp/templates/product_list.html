@@ -59,24 +59,46 @@
 				<div class="row no-gutters">
 <!--******************************************************-->
 {% if product_list %}
+<h2>Все товары</h2>
+<table style="width: 100%; text-align: center">
+  <tr style="border-bottom: 4px solid #d4d4d4;">
+	  <th>Картинка</th>
+	  <th>Название</th>
+	  <th>Цена</th>
+	  <th>Кол-во на складе</th>
+  </tr>
 	{% for product in product_list %}
 		
-				  <div class="col-xl-3 col-sm-4">
-				  	<div class="card-product">
-						<div class="block-card-product_img">
-							{% if product.image %}
-							<img class="ard_image" src="{{ product.image.url }}" alt="Responsive image">
-							{% endif %}
-						</div>
-						  <div class="card-body">
-						    <h5 class="card-title">{{ product.name }}</h5>
-						    <p class="card-text card-text-prod">{{ product.short_desc }}</p>
-						    <a href="{% url 'mainapp:product_detail' product.pk %}" class="btn btn-primary btn-prod-detail">Больше</a>
-					  	</div>
-					  </div>
-				  </div>
+  <tr style="border-bottom: 1px solid #d4d4d4;">
+		{% if product.image %}
+		<td><img class="img-fluid" style="width: 150px;" src="{{ product.image.url }}" alt="картинка"></td>
+		{% else %}
+			<td>Нет картинки</td>
+		{% endif %}
+	  <td><a href="{% url 'mainapp:product_detail' product.pk %}">{{ product.name }}</a></td>
+	  <td>{{ product.price }}</td>
+	  <td>{{ product.quantity }}</td>
+  </tr>
 		 
 	{% endfor %}
+	 </table>
+	  {% block pagination %}
+		{% if is_paginated %}
+			<div class="pagination">
+				<span class="page-links">
+					{% if page_obj.has_previous %}
+						<a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+					{% endif %}
+					<span class="page-current">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+					{% if page_obj.has_next %}
+						<a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+					{% endif %}
+				</span>
+			</div>
+		{% endif %}
+	  {% endblock %}
 {% endif %}
 		 
 

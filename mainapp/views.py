@@ -1,21 +1,27 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product
+from django.views import generic
 
 
-def index(request):
-    title_name = 'Личный сайт для тестов'
-    description = "Личный сайт для тестов: новости и примеры работ."
+class ProductListView(generic.ListView):
+    model = Product
+    paginate_by = 4
+    template_name = 'index.html'
 
-    context = {'set_title':title_name,
-               'description':description,
+    def get_queryset(self):
+        return Product.objects.all().order_by('name')
 
-               }
-    return render(request, 'index.html',context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_list'] = ProductCategory.objects.all()
+        context['set_title'] = 'Каталог товаров'
+        context['description'] = "Интернет магазин"
+        return context
 
 
 def product_list(request):
     title_name = 'Каталог товаров'
-    description = "Личный сайт для тестов: новости и примеры работ. Каталог товаров."
+    description = "Интернет магазин"
     context = {
         'set_title': title_name,
         'description': description,
@@ -23,12 +29,12 @@ def product_list(request):
         'category_list': ProductCategory.objects.all(),
 
     }
-    return render(request, 'product_list.html',context)
+    return render(request, 'product_list.html', context)
 
 
 def product_category(request, pk):
     title_name = 'Каталог товаров'
-    description = "Личный сайт для тестов: новости и примеры работ. Каталог товаров."
+    description = "Интернет магазин"
     product_list = Product.objects.filter(category=pk)
     context = {
         'set_title': title_name,
@@ -44,7 +50,7 @@ def product_detail(request, pk):
     title_name = 'Товар детально'
     current_product = Product.objects.get(pk=pk)
 
-    description = 'Личный сайт для тестов: новости и примеры работ. Детальный просмотр позиции каталога.'
+    description = 'Интернет магазин'
     context = {
         'set_title': title_name,
         'description': description,
