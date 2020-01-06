@@ -100,7 +100,17 @@
 
         </div>
       </div>
-    </div>    
+    </div>
+    <div class="basket">
+      {% if user.is_authenticated %}
+        <a href="{% url 'basketapp:basket_view' %}"> <img src="{% static "images/shopping-cart.png" %}" ></a>
+      {% else%}
+        <img src="{% static "images/shopping-cart.png" %}" >
+      {% endif %}
+    </div>
+    <div class="quantity-basket">
+      {{ basket_slot_list.0.total_quantity }}
+    </div>
   </nav>
   <div class="container-fluid" style="padding-bottom: 20px;">
     <section>

@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from .models import ProductCategory, Product, ProductManufacturer
-
+from basketapp.models import BasketSlot
 
 def index(request):
     title_name = 'Личный сайт для тестов'
     description = "Личный сайт для тестов: новости и примеры работ."
 
-    context = {'set_title':title_name,'description':description}
+    context = {'set_title':title_name,
+               'description':description,
+               'basket_slot_list': BasketSlot.objects.filter(user=request.user)
+               }
     return render(request, 'index.html',context)
 
 def product_list(request):
@@ -19,6 +22,7 @@ def product_list(request):
         'description':description,
         'product_list':Product.objects.all(),
         'category_list':ProductCategory.objects.all(),
+        'basket_slot_list': BasketSlot.objects.filter(user=request.user)
     }
     return render(request, 'product_list.html',context)
 
@@ -35,6 +39,7 @@ def product_category(request, pk):
         'description': description,
         'product_list': product_list,
         'category_list': ProductCategory.objects.all(),
+        'basket_slot_list': BasketSlot.objects.filter(user=request.user)
     }
     return render(request, 'product_list.html', context)
 
@@ -48,5 +53,6 @@ def product_detail(request,pk):
         'description':description,
         'current_product':current_product,
         'category_list': ProductCategory.objects.all(),
+        'basket_slot_list': BasketSlot.objects.filter(user=request.user)
     }
     return render(request, 'product_detail.html',context)
