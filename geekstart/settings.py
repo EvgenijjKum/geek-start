@@ -11,22 +11,23 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from configparser import RawConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8i8j$^u$a6@7!52+8t&a1i6ne!_ay)rz4rfm#5&jb*wg$5-bb%'
+local_config_path = os.path.join(BASE_DIR, 'conf', 'local.conf')
+config = RawConfigParser()
+config.read(local_config_path)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = config.get('main', 'SECRET_KEY')
+DEBUG = config.getboolean('main', 'DEBUG')
+
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'basketapp.apps.BasketappConfig',
     'adminapp.apps.AdminappConfig',
     'bootstrap4',
+    'debug_toolbar',            # DebugToolbar
 ]
 
 MIDDLEWARE = [
@@ -52,7 +54,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',   # DebugToolbar
 ]
+
+INTERNAL_IPS = ('127.0.0.1',)   # DebugToolbar
 
 ROOT_URLCONF = 'geekstart.urls'
 
@@ -74,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'geekstart.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -84,7 +88,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -103,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -125,13 +127,13 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, "static"),
+    # os.path.join(BASE_DIR, "static"),
 ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-AUTH_USER_MODEL='cabinet.AdvUser'
+AUTH_USER_MODEL = 'cabinet.AdvUser'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 EMAIL_HOST = 'smtp.yandex.ru'
@@ -144,4 +146,3 @@ EMAIL_USE_TLS = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 GOOGLE_RECAPTCHA_SECRET_KEY = ['']
-
